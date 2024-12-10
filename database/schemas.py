@@ -29,9 +29,9 @@ class Class_(ClassBase):
         orm_mode = True
 
 class ClassScheduleBase(BaseModel):
-    class_name: str
+    schedule_name: str
     teacher_id: int
-    room_number: str
+    class_id: int 
     time_slot: str
 
 class ClassScheduleCreate(ClassScheduleBase):

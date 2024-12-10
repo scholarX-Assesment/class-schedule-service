@@ -22,9 +22,9 @@ class ClassSchedule(Base):
     __tablename__ = "class_schedules"
 
     id = Column(Integer, primary_key=True, index=True)
-    class_name = Column(String, index=True)
+    schedule_name = Column(String, index=True)
     teacher_id = Column(Integer, ForeignKey('teachers.id'), index=True)
-    room_number = Column(String, index=True)
+    class_id = Column(Integer, ForeignKey('classes.id'), index=True)
     time_slot = Column(String, index=True)
 
     teacher = relationship("Teacher")

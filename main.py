@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from database import models, schemas, database
 from api import crud
 
+# models.Base.metadata.drop_all(bind=database.engine)
 models.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI()
@@ -13,6 +14,9 @@ def read_root():
 
 @app.post("/class_schedules/", response_model=schemas.ClassSchedule)
 def create_class_schedule(class_schedule: schemas.ClassScheduleCreate, db: Session = Depends(database.get_db)):
+    db_teacher = crud.get_teacher(db, teacher_id=class_schedule.teacher_id)
+    if db_teacher is None:
+        raise HTTPException(status_code=400, detail="Teacher not found")
     return crud.create_class_schedule(db=db, class_schedule=class_schedule)
 
 @app.get("/class_schedules/{class_schedule_id}", response_model=schemas.ClassSchedule)
