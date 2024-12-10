@@ -1,11 +1,15 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from .database import models, schemas, database
-from .api import crud
+from database import models, schemas, database
+from api import crud
 
 models.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the Class Schedule API"}
 
 @app.post("/class_schedules/", response_model=schemas.ClassSchedule)
 def create_class_schedule(class_schedule: schemas.ClassScheduleCreate, db: Session = Depends(database.get_db)):

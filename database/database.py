@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-DATABASE_URL = "postgresql://user:password@localhost/class_schedule_db"
+DATABASE_URL = "postgresql://postgres:ahys$532sF@scholarx.c12yaew4cfgj.us-east-1.rds.amazonaws.com:5432/class_schedule_db"
 
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from ..database import models, schemas
+from database import models, schemas
 
 def get_class_schedule(db: Session, class_schedule_id: int):
     return db.query(models.ClassSchedule).filter(models.ClassSchedule.id == class_schedule_id).first()
