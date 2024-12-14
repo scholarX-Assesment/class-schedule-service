@@ -31,4 +31,4 @@ jobs:
         context: .
         push: true
         tags: |
-          ghcr.io/scholarx-assessment/class-schedule-service:latest
+          ghcr.io/scholarx-assesment/class-schedule-service:latest
