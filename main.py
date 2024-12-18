@@ -6,7 +6,7 @@ from api import crud
 # models.Base.metadata.drop_all(bind=database.engine)
 models.Base.metadata.create_all(bind=database.engine)
 
-app = FastAPI()
+app = FastAPI(title="Class Schedule Service APIs")
 
 @app.get("/")
 def read_root():
