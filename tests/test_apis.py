@@ -18,6 +18,7 @@ def db():
         yield db
     finally:
         db.close()
+        models.Base.metadata.drop_all(bind=engine) 
 
 def test_create_teacher(db):
     teacher = schemas.TeacherCreate(name="John", email="john@gmail.com",subject="Math", contact_no="0771234567")
