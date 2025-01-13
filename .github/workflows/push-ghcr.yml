@@ -41,8 +41,20 @@ jobs:
         username: ${{ secrets.SCX_GITHUB_USERNAME }}
         password: ${{ secrets.SCX_GITHUB_TOKEN }}
 
-    - name: Build and push Docker image
-      if: success() # Run this step only if tests pass
+    - name: Build Docker image
+      if: success()
+      run: |
+        docker build -t ghcr.io/scholarx-assesment/class-schedule-service:latest .
+
+    - name: Scan Docker image with Trivy
+      if: success() 
+      uses: aquasecurity/trivy-action@v0.28.0
+      with:
+        image-ref: ghcr.io/scholarx-assesment/class-schedule-service:latest
+        severity: HIGH,CRITICAL
+
+    - name: Push Docker image
+      if: success()
       uses: docker/build-push-action@v3
       with:
         context: .
